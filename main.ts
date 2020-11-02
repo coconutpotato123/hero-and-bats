@@ -1,3 +1,42 @@
+// Initialize
+let dir = "right"
+let heroImg = sprites.builtin.forestMonkey6
+let enemyImg = sprites.builtin.clownFish2
+let projectileImg = img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . 2 2 . . . . . . . 
+    . . . . . . . 2 2 2 2 . . . . . 
+    . . . . . . 2 2 4 4 2 2 . . . . 
+    . . . . . 2 2 2 4 5 5 2 . . . . 
+    . . . . . 2 4 4 4 5 4 2 2 . . . 
+    . . . . . 2 4 2 5 2 5 2 2 . . . 
+    . . . . . 2 2 2 5 4 4 2 2 . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `
+tiles.setTilemap(tilemap`level`)
+info.setLife(3)
+
+// Create hero sprite
+let hero = sprites.create(heroImg, SpriteKind.Player)
+tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
+controller.moveSprite(hero)
+scene.cameraFollowSprite(hero)
+
+// Spawn enemies
+game.onUpdateInterval(500, function () {
+    let enemy = sprites.create(enemyImg, SpriteKind.Enemy)
+    tiles.placeOnRandomTile(enemy, sprites.dungeon.purpleOuterWest0)
+    enemy.setVelocity(50, 0)
+    enemy.setFlag(SpriteFlag.DestroyOnWall, true)
+})
+
 // shoot projectiles 
 
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -20,9 +59,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         x = 50
         y = 0
     }
-    projectile = sprites.createProjectileFromSprite(projectileImg, hero, x, y)
+    let projectile = sprites.createProjectileFromSprite(projectileImg, hero, x, y)
 
 })
+// Keep track of last direction
 game.onUpdate(function() {
     if (controller.up.isPressed()){
         dir = "up"
@@ -40,6 +80,7 @@ game.onUpdate(function() {
     }
 
 })
+// When hero wins game 
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
     game.over(true)
 })
@@ -49,47 +90,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.startEffect(effects.bubbles)
     otherSprite.destroy()
 })
-let enemy: Sprite = null
-let projectile: Sprite = null
-let hero: Sprite = null
-let projectileImg: Image = null
 
-// Initialize
-let dir = "right"
-let heroImg = sprites.builtin.forestMonkey6
-let enemyImg = sprites.builtin.clownFish2
-projectileImg = img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . 2 2 . . . . . . . 
-    . . . . . . . 2 2 2 2 . . . . . 
-    . . . . . . 2 2 4 4 2 2 . . . . 
-    . . . . . 2 2 2 4 5 5 2 . . . . 
-    . . . . . 2 4 4 4 5 4 2 2 . . . 
-    . . . . . 2 4 2 5 2 5 2 2 . . . 
-    . . . . . 2 2 2 5 4 4 2 2 . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `
-tiles.setTilemap(tilemap`level`)
-info.setLife(3)
-// Create hero sprite
-hero = sprites.create(heroImg, SpriteKind.Player)
-tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
-controller.moveSprite(hero)
-scene.cameraFollowSprite(hero)
-// Spawn enemies
-game.onUpdateInterval(500, function () {
-    enemy = sprites.create(enemyImg, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(enemy, sprites.dungeon.purpleOuterWest0)
-    enemy.setVelocity(50, 0)
-    enemy.setFlag(SpriteFlag.DestroyOnWall, true)
-})
+
+
+
+
 
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function(sprite: Sprite, otherSprite: Sprite) {
     sprite.destroy()

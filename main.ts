@@ -113,7 +113,7 @@ projectileImg = img`
     . . . . . . . . . . . . . . . . 
     `
 tiles.setTilemap(tilemap`level`)
-info.setLife(3)
+info.setLife(5)
 // Create hero sprite
 hero = sprites.create(heroImg, SpriteKind.Player)
 tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
@@ -132,7 +132,7 @@ game.onUpdate(function () {
     }
 })
 // Spawn enemies
-game.onUpdateInterval(500, function () {
+game.onUpdateInterval(1000, function () {
     enemy = sprites.create(enemyImg, SpriteKind.Enemy)
     tiles.placeOnRandomTile(enemy, sprites.dungeon.purpleOuterWest0)
     enemy.setVelocity(50, 0)

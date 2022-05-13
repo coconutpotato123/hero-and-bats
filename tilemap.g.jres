@@ -24,7 +24,8 @@
             "sprites.dungeon.collectibleBlueCrystal",
             "sprites.dungeon.collectibleInsignia",
             "sprites.dungeon.floorLight0"
-        ]
+        ],
+        "displayName": "level"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

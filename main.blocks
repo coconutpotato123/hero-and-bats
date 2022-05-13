@@ -17,21 +17,21 @@ b . . b b b b b . . . . . . . c
 . . c c . c c . c c . c c . . . 
 `</field><data>{"commentRefs":[],"fieldData":{"img":"F[Bo-ggk`kS0,kss{kL^"}}</data></block></value><next><block type="variables_set" id="Oci(r`{sA|mb6TM]GRio"><field name="VAR" id="j-@y|OlFS67$296~BzKQ">enemyImg</field><value name="VALUE"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="screen_image_picker" id="tgamo*Z^v)cPjfybWM^Z"><field name="img">img`
 . . . . . . . . . . . . . . . . 
-. . . . . . . . . d . . . . . . 
-. . . . . d d d 2 2 . . . . . . 
-. . . . d . 2 2 . . . 2 2 2 . . 
-. . . . . 2 2 . . . 2 2 2 . . . 
-. . . d 2 . d d 2 2 2 d 2 . . . 
-. . d 2 d d . 2 2 d 2 2 . . . . 
-. . 2 . . 2 2 d 2 2 2 . . . . . 
-. 2 . . 2 2 2 2 2 2 d d d . . . 
-. 2 2 2 2 2 . d 2 d . . d . 2 2 
-. 2 . 2 2 d d 2 . . 2 2 2 2 2 . 
-. . . 2 d . 2 . 2 2 d . . 2 . . 
-. . . . . . 2 2 . . d . 2 . . . 
-. . . . . . . . . . d . 2 . . . 
-. . . . . . . . . d . 2 . . . . 
-. . . . . . . . . . d 2 d d d d 
+. . . . . 4 4 . 4 . . 4 . . . . 
+. . . 4 . 4 4 4 5 4 4 . . . . . 
+. . . . 4 5 5 5 5 5 4 . . . . . 
+. . . 4 4 5 f 5 f 5 4 . . . . . 
+. . . 4 4 5 5 5 5 5 4 4 . . . . 
+. . . . 4 5 5 3 5 5 4 . . . . . 
+. . 4 4 4 5 f f f 5 4 . . . . . 
+. . . 4 4 4 4 4 4 4 4 4 . . . . 
+. 5 5 . 5 4 4 4 4 4 5 . 5 5 . . 
+. . 5 5 5 5 5 5 5 5 5 5 5 . . . 
+. . . . 5 5 5 5 5 5 5 . . . . . 
+. . . . 5 5 5 5 5 5 5 . . . . . 
+. . . . 5 5 5 5 5 5 5 . . . . . 
+. . . . . 5 5 5 5 5 . . . . . . 
+. . . . . . 5 5 5 . . . . . . . 
 `</field><data>{"commentRefs":[],"fieldData":{"img":"tgamo*Z^v)cPjfybWM^Z"}}</data></block></value><next><block type="variables_set" id="pTg*`4Zt+fP4Ows?Rni}"><field name="VAR" id="z?|Ivk8r)P!e![6n;*V_">projectileImg</field><value name="VALUE"><shadow type="math_number" id="=-T2L=H.#+dy=V`+^tvE"><field name="NUM">0</field></shadow><block type="screen_image_picker" id="p;1,Ap*PTCFF-iCZ]?TN"><field name="img">img`
 . . . . . . . . . . . . . . . . 
 . . . . . . . . 9 . . . . . . . 

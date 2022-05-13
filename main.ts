@@ -1,3 +1,25 @@
+// When hero wins game
+scene.onOverlapTile(SpriteKind.Player, img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 6 6 6 . . . . . . . 
+    . . . . 6 6 6 6 6 6 6 . . . . . 
+    . . . 6 3 6 7 6 8 6 3 6 . . . . 
+    . . 6 3 6 6 6 6 6 6 6 3 6 . . . 
+    . 6 6 6 . 6 6 1 6 6 . 6 6 6 . . 
+    . . . . . . 6 6 6 . . . . . . . 
+    . . . . . 6 6 6 6 6 . . . . . . 
+    . c 6 . . 6 6 3 3 6 6 . . 6 c . 
+    . . 6 . 6 6 3 3 3 3 6 6 . 6 . . 
+    . . 6 6 6 6 3 3 3 3 6 6 6 6 . . 
+    . . . . 6 6 3 3 3 3 6 6 . . . . 
+    . . . . 6 6 3 3 3 3 6 6 . . . . 
+    . . . . 6 6 6 3 3 6 6 6 . . . . 
+    . . . . 6 6 6 6 6 6 6 6 . . . . 
+    . . . . . . 6 6 6 6 . . . . . . 
+    `, function (sprite, location) {
+    game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
+    game.over(true)
+})
 // shoot projectiles
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (dir == "up") {
@@ -14,10 +36,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         y = 0
     }
     projectile = sprites.createProjectileFromSprite(projectileImg, hero, x, y)
-})
-// When hero wins game
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
-    game.over(true)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
@@ -37,6 +55,7 @@ let x = 0
 let hero: Sprite = null
 let projectileImg: Image = null
 let dir = ""
+game.showLongText("Try to get to your long lost brother! Each time you roll, the number you land on is the amount of spaces you can move. ADD MORE ", DialogLayout.Center)
 // Initialize
 dir = "right"
 let heroImg = img`
@@ -77,18 +96,18 @@ let enemyImg = img`
     `
 projectileImg = img`
     . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . 2 2 . . . . . . . 
-    . . . . . . . 2 2 2 2 . . . . . 
-    . . . . . . 2 2 4 4 2 2 . . . . 
-    . . . . . 2 2 2 4 5 5 2 . . . . 
-    . . . . . 2 4 4 4 5 4 2 2 . . . 
-    . . . . . 2 4 2 5 2 5 2 2 . . . 
-    . . . . . 2 2 2 5 4 4 2 2 . . . 
+    . . . . . . . . 9 . . . . . . . 
+    . . . . . . . 9 1 9 . . . . . . 
+    . . . . . . 9 1 1 1 9 . . . . . 
+    . . . . . . 9 1 1 1 9 . . . . . 
+    . . . . . 9 1 6 1 1 1 9 . . . . 
+    . . . . 9 1 6 1 1 1 1 1 9 . . . 
+    . . . . 9 1 6 1 1 1 1 1 9 . . . 
+    . . . . 9 1 1 1 1 1 1 1 9 . . . 
+    . . . . 9 1 1 1 1 1 1 1 9 . . . 
+    . . . . . 9 1 1 1 1 1 9 . . . . 
+    . . . . . . 9 1 1 1 9 . . . . . 
+    . . . . . . . 9 9 9 . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 

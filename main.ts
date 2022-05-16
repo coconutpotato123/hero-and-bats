@@ -1,25 +1,3 @@
-// When hero wins game
-scene.onOverlapTile(SpriteKind.Player, img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . 6 6 6 . . . . . . . 
-    . . . . 6 6 6 6 6 6 6 . . . . . 
-    . . . 6 3 6 7 6 8 6 3 6 . . . . 
-    . . 6 3 6 6 6 6 6 6 6 3 6 . . . 
-    . 6 6 6 . 6 6 1 6 6 . 6 6 6 . . 
-    . . . . . . 6 6 6 . . . . . . . 
-    . . . . . 6 6 6 6 6 . . . . . . 
-    . c 6 . . 6 6 3 3 6 6 . . 6 c . 
-    . . 6 . 6 6 3 3 3 3 6 6 . 6 . . 
-    . . 6 6 6 6 3 3 3 3 6 6 6 6 . . 
-    . . . . 6 6 3 3 3 3 6 6 . . . . 
-    . . . . 6 6 3 3 3 3 6 6 . . . . 
-    . . . . 6 6 6 3 3 6 6 6 . . . . 
-    . . . . 6 6 6 6 6 6 6 6 . . . . 
-    . . . . . . 6 6 6 6 . . . . . . 
-    `, function (sprite, location) {
-    game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
-    game.over(true)
-})
 // shoot projectiles
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (dir == "up") {
@@ -36,6 +14,11 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         y = 0
     }
     projectile = sprites.createProjectileFromSprite(projectileImg, hero, x, y)
+})
+// When hero wins game
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
+    game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
+    game.over(true)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
@@ -111,6 +94,24 @@ projectileImg = img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
+    `
+let brotherImg = img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . 6 6 f 6 6 6 f 6 6 . . . 
+    . . . 6 6 6 3 6 6 6 3 6 6 6 . . 
+    . . 6 6 6 6 6 6 6 6 6 6 6 6 6 . 
+    . 6 6 6 . . 6 6 3 6 6 . 6 6 6 6 
+    . 6 6 . . . 6 f 6 f 6 . . . 6 6 
+    . . . . . . . 6 6 6 . . . . . . 
+    . . . . . . . 6 6 6 . . . . . . 
+    . . . . 6 6 6 6 6 6 6 6 6 6 . . 
+    . . 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+    . . 6 6 6 6 6 3 3 3 3 6 6 6 6 6 
+    . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
+    . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
+    . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
+    . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     `
 tiles.setTilemap(tilemap`level`)
 info.setLife(5)

@@ -36,6 +36,7 @@ let projectile: Sprite = null
 let y = 0
 let x = 0
 let hero: Sprite = null
+let brother: Sprite = null
 let projectileImg: Image = null
 let dir = ""
 game.showLongText("Try to get to your long lost brother! Each time you roll, the number you land on is the amount of spaces you can move. ADD MORE ", DialogLayout.Center)
@@ -113,6 +114,7 @@ let brotherImg = img`
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     `
+tiles.placeOnRandomTile(brother, sprites.dungeon.collectibleBlueCrystal)
 let diceImgs = [
 img`
     . . . . . . . . . . . . . . . . 
@@ -227,6 +229,8 @@ tiles.setTilemap(tilemap`level`)
 info.setLife(5)
 // Create hero sprite
 hero = sprites.create(heroImg, SpriteKind.Player)
+// Create hero sprite
+brother = sprites.create(brotherImg, SpriteKind.Player)
 tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
 controller.moveSprite(hero)
 scene.cameraFollowSprite(hero)

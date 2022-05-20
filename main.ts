@@ -15,15 +15,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
     projectile = sprites.createProjectileFromSprite(projectileImg, hero, x, y)
 })
-// When hero wins game
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherSprite) {
     game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
     game.over(true)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprite.destroy()
-    otherSprite.startEffect(effects.fire)
-    otherSprite.destroy()
+    enemy.destroy(effects.fire, 500)
 })
 // When hero and enemy collide
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
@@ -36,7 +33,6 @@ let projectile: Sprite = null
 let y = 0
 let x = 0
 let hero: Sprite = null
-let brother: Sprite = null
 let projectileImg: Image = null
 let dir = ""
 game.showLongText("Try to get to your long lost brother! Each time you roll, the number you land on is the amount of spaces you can move. ADD MORE ", DialogLayout.Center)
@@ -114,7 +110,17 @@ let brotherImg = img`
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     `
-tiles.placeOnRandomTile(brother, sprites.dungeon.collectibleBlueCrystal)
+tiles.setTilemap(tilemap`level`)
+info.setLife(5)
+// Create hero sprite
+hero = sprites.create(heroImg, SpriteKind.Player)
+tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
+controller.moveSprite(hero)
+scene.cameraFollowSprite(hero)
+let list = [0, 1]
+// Create brother sprite
+let brother = sprites.create(brotherImg, SpriteKind.Player)
+tiles.placeOnTile(brother, tiles.getTileLocation(11, 28))
 let diceImgs = [
 img`
     . . . . . . . . . . . . . . . . 
@@ -225,16 +231,6 @@ img`
     . . . . . . . . . . . . . . . . 
     `
 ]
-tiles.setTilemap(tilemap`level`)
-info.setLife(5)
-// Create hero sprite
-hero = sprites.create(heroImg, SpriteKind.Player)
-// Create hero sprite
-brother = sprites.create(brotherImg, SpriteKind.Player)
-tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
-controller.moveSprite(hero)
-scene.cameraFollowSprite(hero)
-let list = [0, 1]
 // Keep track of last direction
 game.onUpdate(function () {
     if (controller.up.isPressed()) {

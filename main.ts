@@ -19,6 +19,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherS
     game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
     game.over(true)
 })
+function diceRoll () {
+    let diceImgs: Image[] = []
+    roll = sprites.create(diceImgs[randint(0, diceImgs.length - 1)], 0)
+}
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     enemy.destroy(effects.fire, 500)
 })
@@ -29,13 +33,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     otherSprite.destroy()
 })
 let enemy: Sprite = null
+let roll: Sprite = null
 let projectile: Sprite = null
 let y = 0
 let x = 0
 let hero: Sprite = null
 let projectileImg: Image = null
 let dir = ""
-game.showLongText("Try to get to your long lost brother! Each time you roll, the number you land on is the amount of spaces you can move. ADD MORE ", DialogLayout.Center)
+game.showLongText("Try to get to your long lost brother! Each time you roll, the number you land on is the amount of spaces you can move. GOOD LUCK!!", DialogLayout.Center)
 // Initialize
 dir = "right"
 let heroImg = img`
@@ -121,25 +126,24 @@ let list = [0, 1]
 // Create brother sprite
 let brother = sprites.create(brotherImg, SpriteKind.Player)
 tiles.placeOnTile(brother, tiles.getTileLocation(11, 28))
-let diceImgs = [
 img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 f f 1 1 1 1 . . . 
-    . . . 1 1 1 1 f f 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . 1 1 1 1 1 1 1 1 1 1 . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `,
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 f f 1 1 1 1 . . .
+    . . . 1 1 1 1 f f 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . 1 1 1 1 1 1 1 1 1 1 . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+`,
 img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
@@ -230,7 +234,6 @@ img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `
-]
 // Keep track of last direction
 game.onUpdate(function () {
     if (controller.up.isPressed()) {

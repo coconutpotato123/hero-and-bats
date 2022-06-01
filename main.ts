@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const Dice = SpriteKind.create()
+}
 // shoot projectiles
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (dir == "up") {
@@ -19,20 +22,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Player, function (sprite, otherS
     game.showLongText("BROTHER I FOUND YOU BROTHAAAH!!", DialogLayout.Center)
     game.over(true)
 })
+// })
 function diceRoll () {
     let diceImgs: Image[] = []
     roll = sprites.create(diceImgs[randint(0, diceImgs.length - 1)], 0)
 }
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    enemy.destroy(effects.fire, 500)
-})
-// When hero and enemy collide
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    info.changeLifeBy(-1)
-    otherSprite.startEffect(effects.bubbles)
-    otherSprite.destroy()
-})
-let enemy: Sprite = null
 let roll: Sprite = null
 let projectile: Sprite = null
 let y = 0
@@ -61,7 +55,7 @@ let heroImg = img`
     . . b b . b b . b b . b b . . . 
     . . c c . c c . c c . c c . . . 
     `
-let enemyImg = img`
+let enemyImg3 = img`
     . . . . . . . . . . . . . . . . 
     . . . . . 4 4 . 4 . . 4 . . . . 
     . . . 4 . 4 4 4 5 4 4 . . . . . 
@@ -115,17 +109,374 @@ let brotherImg = img`
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     . . 6 6 6 6 3 3 3 3 3 3 6 6 6 6 
     `
+let diceImg1 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg2 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg3 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg4 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg5 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg6 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg7 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg8 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg9 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg10 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg11 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg12 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg13 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 f f f f 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+let diceImg14 = img`
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 f f f f 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 f f f f 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 f f f f 1 1 1 1 1 1 1 1 1 1 1 
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+    `
+enemyImg3 = img`
+    . . . . . . . 5 . . . 5 . . . . 
+    . . 4 4 . 5 4 4 4 . 5 5 4 . . . 
+    . . . 4 4 4 4 4 4 4 4 5 4 . . . 
+    . . . 5 4 5 5 5 5 5 4 5 4 4 . . 
+    . . . 5 4 5 f 5 f 5 4 4 4 4 . . 
+    . . . 4 4 5 5 5 5 5 4 5 . 5 . . 
+    . . 4 4 4 5 5 f 5 5 4 5 5 5 . . 
+    . . 5 5 4 4 4 4 4 4 4 4 4 . . . 
+    . . . . 4 5 5 5 5 4 4 . 4 . . . 
+    . . . . 4 . 5 5 . . 4 . . . . . 
+    . . . . . . 5 5 . . . . . . . . 
+    . . . . . 5 5 5 5 . . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    `
+enemyImg3 = img`
+    . . . . . . . 5 . . . 5 . . . . 
+    . . 4 4 . 5 4 4 4 . 5 5 4 . . . 
+    . . . 4 4 4 4 4 4 4 4 5 4 . . . 
+    . . . 5 4 5 5 5 5 5 4 5 4 4 . . 
+    . . . 5 4 5 f 5 f 5 4 4 4 4 . . 
+    . . . 4 4 5 5 5 5 5 4 5 . 5 . . 
+    . . 4 4 4 5 5 f 5 5 4 5 5 5 . . 
+    . . 5 5 4 4 4 4 4 4 4 4 4 . . . 
+    . . . . 4 5 5 5 5 4 4 . 4 . . . 
+    . . . . 4 . 5 5 . . 4 . . . . . 
+    . . . . . . 5 5 . . . . . . . . 
+    . . . . . 5 5 5 5 . . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    `
+enemyImg3 = img`
+    . . . . . . . 5 . . . 5 . . . . 
+    . . 4 4 . 5 4 4 4 . 5 5 4 . . . 
+    . . . 4 4 4 4 4 4 4 4 5 4 . . . 
+    . . . 5 4 5 5 5 5 5 4 5 4 4 . . 
+    . . . 5 4 5 f 5 f 5 4 4 4 4 . . 
+    . . . 4 4 5 5 5 5 5 4 5 . 5 . . 
+    . . 4 4 4 5 5 f 5 5 4 5 5 5 . . 
+    . . 5 5 4 4 4 4 4 4 4 4 4 . . . 
+    . . . . 4 5 5 5 5 4 4 . 4 . . . 
+    . . . . 4 . 5 5 . . 4 . . . . . 
+    . . . . . . 5 5 . . . . . . . . 
+    . . . . . 5 5 5 5 . . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    . . . . 5 5 5 5 5 5 . . . . . . 
+    `
 tiles.setTilemap(tilemap`level`)
 info.setLife(5)
 // Create hero sprite
 hero = sprites.create(heroImg, SpriteKind.Player)
 tiles.placeOnRandomTile(hero, sprites.dungeon.collectibleInsignia)
+// Create hero sprite
+let enemyy3 = sprites.create(enemyImg3, SpriteKind.Enemy)
+tiles.placeOnRandomTile(enemyy3, sprites.vehicle.roadVertical)
+// Create hero sprite
+enemyy3 = sprites.create(enemyImg3, SpriteKind.Enemy)
+tiles.placeOnRandomTile(enemyy3, sprites.vehicle.roadTurn3)
+// Create hero sprite
+enemyy3 = sprites.create(enemyImg3, SpriteKind.Enemy)
+tiles.placeOnRandomTile(enemyy3, sprites.vehicle.roadHorizontal)
 controller.moveSprite(hero)
 scene.cameraFollowSprite(hero)
 let list = [0, 1]
 // Create brother sprite
 let brother = sprites.create(brotherImg, SpriteKind.Player)
 tiles.placeOnTile(brother, tiles.getTileLocation(11, 28))
+// Create brother sprite
+let dice1 = sprites.create(diceImg1, SpriteKind.Player)
+tiles.placeOnTile(dice1, tiles.getTileLocation(9, 2))
+// Create brother sprite
+let dice2 = sprites.create(diceImg2, SpriteKind.Player)
+tiles.placeOnTile(dice2, tiles.getTileLocation(10, 2))
+// Create brother sprite
+let dice3 = sprites.create(diceImg3, SpriteKind.Player)
+tiles.placeOnTile(dice3, tiles.getTileLocation(4, 3))
+// Create brother sprite
+let dice4 = sprites.create(diceImg4, SpriteKind.Player)
+tiles.placeOnTile(dice4, tiles.getTileLocation(5, 3))
+// Create brother sprite
+let dice5 = sprites.create(diceImg5, SpriteKind.Player)
+tiles.placeOnTile(dice5, tiles.getTileLocation(3, 14))
+// Create brother sprite
+let dice6 = sprites.create(diceImg6, SpriteKind.Player)
+tiles.placeOnTile(dice6, tiles.getTileLocation(4, 14))
+// Create brother sprite
+let dice7 = sprites.create(diceImg7, SpriteKind.Player)
+tiles.placeOnTile(dice7, tiles.getTileLocation(7, 10))
+// Create brother sprite
+let dice8 = sprites.create(diceImg8, SpriteKind.Player)
+tiles.placeOnTile(dice8, tiles.getTileLocation(8, 10))
+// Create brother sprite
+let dice9 = sprites.create(diceImg9, SpriteKind.Player)
+tiles.placeOnTile(dice9, tiles.getTileLocation(8, 5))
+// Create brother sprite
+let dice10 = sprites.create(diceImg10, SpriteKind.Player)
+tiles.placeOnTile(dice10, tiles.getTileLocation(7, 5))
+// Create brother sprite
+let dice11 = sprites.create(diceImg11, SpriteKind.Player)
+tiles.placeOnTile(dice11, tiles.getTileLocation(6, 19))
+// Create brother sprite
+let dice12 = sprites.create(diceImg12, SpriteKind.Player)
+tiles.placeOnTile(dice12, tiles.getTileLocation(7, 19))
+// Create brother sprite
+let dice13 = sprites.create(diceImg13, SpriteKind.Player)
+tiles.placeOnTile(dice13, tiles.getTileLocation(4, 26))
+// Create brother sprite
+let dice14 = sprites.create(diceImg14, SpriteKind.Player)
+tiles.placeOnTile(dice14, tiles.getTileLocation(5, 26))
 img`
     . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . .
@@ -245,11 +596,4 @@ game.onUpdate(function () {
     } else if (controller.left.isPressed()) {
         dir = "left"
     }
-})
-// Spawn enemies
-game.onUpdateInterval(1000, function () {
-    enemy = sprites.create(enemyImg, SpriteKind.Enemy)
-    tiles.placeOnRandomTile(enemy, sprites.dungeon.purpleOuterWest0)
-    enemy.setVelocity(50, 0)
-    enemy.setFlag(SpriteFlag.DestroyOnWall, true)
 })
